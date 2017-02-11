@@ -1,4 +1,4 @@
-require("colors");
+const colors = require("colors");
 const prettier = require("prettier");
 const jsdiff = require("diff");
 const fs = require("fs");
@@ -22,16 +22,9 @@ const pass2 = prettier.format(pass1);
 
 if (pass1 !== pass2) {
   console.error(`------ ${filename} ------`);
-  const diff = jsdiff.diffLines(pass1, pass2);
+  let diff = jsdiff.createTwoFilesPatch('', '', pass1, pass2, '', '', {context: 2});
 
-  diff.forEach(function(part) {
-    // green for additions, red for deletions
-    // grey for common parts
-    const color = part.added ? "green" : part.removed ? "red" : "grey";
-    if (part.added || part.removed) {
-      process.stderr.write(part.value[color]);
-    }
-  });
+  diff = diff.replace(/(^\+[^\+].*\n)|(^\-[^\-].*\n)/gm, (_, m1, m2) => m1 ? colors.green(m1) : colors.red(m2))
 
-  console.log();
+  console.log(diff);
 }
