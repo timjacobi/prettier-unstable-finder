@@ -1,0 +1,16 @@
+{
+  "name": "prettier-unstable-finder",
+  "version": "1.0.0",
+  "description": "Find unstable behaviour in the prettier tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tim Jacobi",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "diff": "^3.2.0",
+    "prettier": "^0.16.0"
+  }
+}
